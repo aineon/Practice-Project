@@ -1,5 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
-
 
 
 const cardEasyList = [
@@ -53,7 +51,7 @@ const cardEasyList = [
     },
 ];
 
-const cardListMedium = [
+const cardMediumList = [
     {
         name: 'boat',
         img: 'assets/images/bunagee.jpg'
@@ -152,7 +150,7 @@ const cardListMedium = [
     }, 
 ];
 
- const cardListHard = [
+ const cardHardList = [
         {
         name: 'boat',
         img: 'assets/images/bunagee.jpg'
@@ -297,7 +295,7 @@ const cardListMedium = [
         name: 'lake',
         img: 'assets/images/lake.jpg'
     }
- ];
+ ]; 
 
  const grid = document.querySelector('.grid')
 
@@ -312,4 +310,8 @@ const cardListMedium = [
         }
  }
 createBoardEasy();
- })
+ 
+
+function createBoard(cardEasyList) {
+    console.log(cardEasyList);
+}
