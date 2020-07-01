@@ -56,7 +56,7 @@ body {
     max-width: 960px;
     justify-content: space-evenly;*/
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(6, auto);
     grid-gap: 1px;
     justify-content: center; 
     perspective: 750px;
@@ -75,15 +75,15 @@ body {
   border: 2px solid lime; 
   transform: scale(1);
   transform-style: preserve-3d;
-  transition: .5s;
+  transition: .3s;
 }
 
 .card:active {
-    transform: scale(.95);
+    transform: scale(.97);
     transition: transform .2s;
 }
 
-.card.flip {
+.card-flip {
     transform: rotateY(180deg);
 }
 
