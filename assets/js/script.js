@@ -1,7 +1,8 @@
 const maxFlip = 2,
-      defaultImage = 'assets/images/ireland.jpg',
-      cardList = [
-          {
+    delay = 3000,
+    defaultImage = 'assets/images/ireland.jpg',
+    cardList = [
+        {
             name: 'boat',
             img: 'assets/images/bunnagee.jpg'
         },
@@ -72,74 +73,115 @@ const maxFlip = 2,
         {
             name: 'lake',
             img: 'assets/images/lake.jpg'
-        }   
+        }
     ];
 
-function shuffleCards(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-}
-
-    let easyGame = cardList.slice(0, 6).concat(cardList.slice(0, 6));
-    let mediumGame = cardList.slice(0, 12).concat(cardList.slice(0, 12));
-    let hardGame = cardList.concat(cardList);
+let easyGame = cardList.slice(0, 6).concat(cardList.slice(0, 6));
+let mediumGame = cardList.slice(0, 12).concat(cardList.slice(0, 12));
+let hardGame = cardList.concat(cardList);
 
 let timeoutID,
     currentName = '',
     flipCounter = 0,
     matchedCards = [];
+
+function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+   }
+ 
 function loadGame(difficulty) {
     // easy, medium, hard
     switch (difficulty.toLowerCase()) {
         case 'easy':
-            createBoard(easyGame);
+            shuffleCards(easyGame);
             break;
         case 'medium':
-            createBoard(mediumGame);
+            shuffleCards(mediumGame);
             break;
         case 'hard':
-            createBoard(hardGame);
+            shuffleCards(hardGame);
             break;
         default:
             break;
     }
-    shuffleCards(hardGame)
-}; 
-function flipCard(card) {
+};
+
+function shuffleCards(array) {
+    let arr_len = array.length - 1, temp, index;
+
+    while (arr_len > 0) {
+        // Set random index
+        index = Math.floor(Math.random() * arr_len);
+        // decrease the array_length by 1
+        arr_len--;
+
+        // Perform swap
+        temp = array[arr_len];
+        array[arr_len] = array[index];
+        array[index] = temp;
+    }
+    createBoard(array);
+}
+
+function unFlip(PreviousCard, CurrentCard) {
+        let previousCard = document.querySelectorAll(`[data-name="${PreviousCard}"]`)[0];
+        let currentCard = document.querySelectorAll(`[data-name="${CurrentCard}"]`)[0];
+
+        currentCard.setAttribute('data-name', CurrentCard);
+        currentCard.setAttribute('data-path', currentCard.src);
+        currentCard.setAttribute('src', defaultImage);
+
+        previousCard.setAttribute('data-name', PreviousCard);
+        previousCard.setAttribute('data-path', previousCard.src);
+        previousCard.setAttribute('src', defaultImage);
+}
+
+async function flipCard(card) {
     // Flip card
     flipCounter += 1;
     card.src = card.getAttribute('data-path');
     let cardName = card.getAttribute('data-name');
+
     if (parseInt(flipCounter) === 1) {
         currentName = cardName;
-    }
-    else if (cardName === currentName) {
-        // We have a match, reset flipCounter and CurrentName
+        return;
+    } else if (parseInt(flipCounter) === parseInt(maxFlip)) {
+        
+        // 1. Check if the cards match
+        
+        // 3. Reset the flip counter and return
+
+        // Sleep for 3 seconds
+        await sleep(delay);
+
+        // check if the cards do not match
+        if (currentName !== cardName) {
+            unFlip(currentName, cardName);
+        }
+
+        // Reset the flip counter
         flipCounter = 0;
-        currentName = '';
-        matchedCards.push(card);
-        console.log(matchedCards)
-    } else if (flipCounter === maxFlip && cardName !== currentName) {
-        // We do not have a match
-        timeoutID = window.setTimeout(function () {
-            let images = document.querySelectorAll(`[data-name*="${currentName}"]`);
-            images.forEach(img => {
-                img.src = defaultImage;
-            });
-            flipCounter = 0;
-            currentName = '';
-            card.src = defaultImage;
-            clearTimeout(timeoutID);
-        }, 1500)
     }
+
+    // else if (cardName === currentName) {
+    //     // We have a match, reset flipCounter and CurrentName
+    //     flipCounter = 0;
+    //     currentName = '';
+    //     matchedCards.push(card);
+    // } else if (flipCounter === maxFlip && cardName !== currentName) {
+    //     // We do not have a match
+    //     timeoutID = window.setTimeout(function () {
+    //         let images = document.querySelectorAll(`[data-name*="${currentName}"]`);
+    //         images.forEach(img => {
+    //             img.src = defaultImage;
+    //         });
+    //         flipCounter = 0;
+    //         currentName = '';
+    //         card.src = defaultImage;
+    //         clearTimeout(timeoutID);
+    //     }, 1500)
+    // }
 };
-
-
- 
 
 function createBoard(cardList) {
     const grid = document.getElementById('grid');
@@ -157,3 +199,11 @@ function createBoard(cardList) {
         grid.appendChild(card);
     });
 }
+
+
+ 
+   
+
+
+
+
