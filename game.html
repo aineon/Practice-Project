@@ -15,17 +15,17 @@
     </div>
        </div>
        <div class="game-container">
-       <button class="shuffle">Shuffle</button>
+       <button class="shuffle" onclick="">Shuffle</button>
     <button class="restart">Restart</button>
     <div> <a href="index.html">Home</a></div> 
        </div>
-       <div>
-       <button class="easy-game" onclick="loadGame('easy');">Easy</button>
-       <button class="medium-game" onclick="loadGame('Medium');">Medium</button>
-       <button class="hard-game" onclick="loadGame('hard');">Hard</button>
+       <div class="overlay">
+       <button class="difficulty-btn" onclick="loadGame('easy');">Easy</button>
+       <button class="difficulty-btn" onclick="loadGame('Medium');">Medium</button>
+       <button class="difficulty-btn" onclick="loadGame('hard');">Hard</button>
        </div>
 ​
-    <div id="grid" class="grid">
+    <div id="grid">
     </div>
     <script src="assets/js/script.js"></script> 
 </body>
