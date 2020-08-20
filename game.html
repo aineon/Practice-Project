@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+    <title>Off The Beaten Track</title>
 </head>
 <body>
-<div id="game">
-    <div id="info-container">
-    <h1 class="game-title">Off The Beaten Track</h1>
-    <span id="timer">Time:</span>
-    <span id="counter">Flips:</span>
-    </div>
-       </div>
-       <div class="game-container">
-       <button class="shuffle">Shuffle</button>
-    <button class="restart">Restart</button>
-    <div> <a href="index.html">Home</a></div> 
-       </div>
-       <div>
-       <button class="easy-game" onclick="loadGame('easy');">Easy</button>
-       <button class="medium-game" onclick="loadGame('Medium');">Medium</button>
-       <button class="hard-game" onclick="loadGame('hard');">Hard</button>
-       </div>
-​
-    <div id="grid" class="grid">
-    </div>
+<header></header>
+<div class="win-overlay">
+<h2 class="game-title">
+Congratulations!</h2>
+<button class="play-again-btn">Play Again</button>
+</div>
+<div class="lose-overlay">
+<h2 class="game-title">
+Game Over</h2>
+<button class="play-again-btn">Play Again</button>
+</div> 
+<div class="game-container">
+<div class="game-info">
+<span id="timer">Time:</span>
+<span id="flip-counter">Flips 0</span>
+</div>
+<div><button class="restart-btn">Restart</button></div>
+<div id="grid" class="board">
+</div>
+</div>
     <script src="assets/js/script.js"></script> 
 </body>
 </html>

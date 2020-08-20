@@ -1,81 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Uncial+Antiqua&display=swap');
-
-body { 
-    font-family: "Open Sans", sans-serif;
-}
-/* index.html */
-
-.landing-page {
-    height: 100vh;
-    background: url("../images/pink_mountain.jpg") no-repeat bottom left; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    justify-content: center; 
-}
-
-.opaque-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0,0,0,0.1);
-}
-
-.page-title {
-    margin-top: 20px;
-    font-family: "Uncial Antiqua", serif;
-    color:#067906;
-    font-weight: bold;
-}
-
-.subtitle {
-    font-family: "Uncail Antiqua", serif;
-    color:#067906;
-    font-weight: bold;
-}
-
-.instructions,
-.start-game {
-    z-index: 1;
-}
-
-/* Game.html */
-
-.game {
+body {
     box-sizing: border-box;
 }
 
-.grid {
-    /*display: flex;
-    flex-wrap: wrap; 
-    margin: 0, auto;
-    grid-gap: 1px;
-    max-width: 960px;
-    justify-content: space-evenly;*/
-    display: grid;
-    grid-template-columns: repeat(6, auto);
-    grid-gap: 1px;
-    justify-content: center; 
-    perspective: 750px;
+.win-overlay,
+.lose-overlay {
+position: fixed;
+top: 0;
+left: 0;
+height: 100%;
+width: 100%;
+background-color: rgba(0, 0, 0, .6);
+cursor: pointer;
+}
+
+.win-overlay {
+    display: none;
+}
+
+.lose-overlay {
+    display: none;
+}
+
+#grid {
+display: grid;
+grid-template-columns: repeat(6, auto);
+grid-gap: 2px;
+justify-content: center;
+perspective: 1000px;
 }
 
 
 .card {
-  /*position: absolute;*/
-  width: 130px;
-  height: 130px;
+  height: 125px;
+  width: 125px;
   display: flex;
   justify-content: center;
   align-items: center;
-  backface-visibility: hidden;
+ /* backface-visibility: hidden; */
   border-radius: 5px;
   border: 2px solid lime; 
   transform: scale(1);
   transform-style: preserve-3d;
-  transition: .3s;
+  transition: transform .4s ease-in-out;
 }
 
 .card:active {
@@ -83,10 +49,15 @@ body {
     transition: transform .2s;
 }
 
-.card-flip {
+.card.flip {
     transform: rotateY(180deg);
 }
-
+.card-front,
+.card-back {
+    width: 125px;
+    height: 125px;
+   /* backface-visibility: hidden; */
+}
 .card-front {
     transform: rotateY(180deg);
-}
+} 
